@@ -4,10 +4,12 @@ name: svm
 version: 1
 ########## INPUTS ##########
 inputs: 
+  
   name:
     type: string
     title: Имя VM
     description: Необходимо ввести имя создаваемого виртуального ресурса (ВМ)
+  
   regionPlaces:
     type: string
     title: Место развертывания
