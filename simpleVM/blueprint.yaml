@@ -1,6 +1,6 @@
 ---
 formatVersion: 1
-name: svm
+name: Simple Virtual Machine
 version: 1
 ########## INPUTS ##########
 inputs: 
