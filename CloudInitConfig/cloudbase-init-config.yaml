@@ -1,1 +1,3 @@
-#cloud-config
+cloudConfig: |
+  #cloud-config
+  set_hostname: '${resource.Cloud_Machine_1.hostname}'
