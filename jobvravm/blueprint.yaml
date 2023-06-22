@@ -28,3 +28,4 @@ resources:
     type: Cloud.Machine
     properties:
     name: ${input.name}
+    flavor: 'unlimited'
