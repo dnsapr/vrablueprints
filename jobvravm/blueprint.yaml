@@ -25,4 +25,5 @@ inputs:
 ########## RESOURCES ##########
 resources:
   vm1:
-    type:Cloud.Machine
+    type: Cloud.Machine
+    properties:
