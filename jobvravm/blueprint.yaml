@@ -27,6 +27,6 @@ resources:
   vm1:
     type: Cloud.Machine
     properties:
-    name: ${input.name}
-    flavor: 'unlimited'
-    image: win2022
+      name: ${input.name}
+      flavor: 'unlimited'
+      image: win2022
