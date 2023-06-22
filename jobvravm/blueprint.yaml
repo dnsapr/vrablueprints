@@ -36,6 +36,6 @@ resources:
     properties:
       name: ${input.name}
       constraints: 
-        - tag: ${input.regoinPlaces} 
+        - tag: ${input.regionPlaces} 
       flavor: 'unlimited'
       image: ${input.img}
