@@ -35,5 +35,7 @@ resources:
     type: Cloud.Machine
     properties:
       name: ${input.name}
+      constraints: 
+        - tag: ${input.regoinPlaces} 
       flavor: 'unlimited'
       image: ${input.img}
