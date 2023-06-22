@@ -27,3 +27,4 @@ resources:
   vm1:
     type: Cloud.Machine
     properties:
+    name: ${input.name}
