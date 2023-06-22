@@ -23,4 +23,6 @@ inputs:
 
   
 ########## RESOURCES ##########
-resources: 
+resources:
+  vm1:
+    type:Cloud.Machine
