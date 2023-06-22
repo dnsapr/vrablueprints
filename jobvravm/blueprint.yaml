@@ -19,7 +19,14 @@ inputs:
         const: onprem   ### должно совпадать с Cloud Zone
       - title: Cloud Provider
         const: cloud    ### должно совпадать с Cloud Zone
-  
+
+  img:
+    type: string
+    title: Операционная Система
+    description: Выбирите операционную систему
+      oneOf:
+        - title: Windows
+          const: 'win2022'  
 
   
 ########## RESOURCES ##########
@@ -29,4 +36,4 @@ resources:
     properties:
       name: ${input.name}
       flavor: 'unlimited'
-      image:   'win2022'
+      image: ${input.img}
