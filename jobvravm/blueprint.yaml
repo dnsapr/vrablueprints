@@ -29,4 +29,4 @@ resources:
     properties:
       name: ${input.name}
       flavor: 'unlimited'
-      image: win2022
+      image:   'win2022'
