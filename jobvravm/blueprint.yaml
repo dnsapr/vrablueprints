@@ -24,9 +24,9 @@ inputs:
     type: string
     title: Операционная Система
     description: Выбирите операционную систему
-      oneOf:
-        - title: Windows
-          const: 'win2022'  
+    oneOf:
+      - title: Windows
+        const: 'win2022'  
 
   
 ########## RESOURCES ##########
