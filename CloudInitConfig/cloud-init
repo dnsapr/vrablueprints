@@ -1,6 +1,6 @@
 [DEFAULT]
-username=Admin
-groups=Administrators
+username=Администратор
+groups=Администраторы
 rename_admin_user=true
 first_logon_behaviour=no
 inject_user_password=true

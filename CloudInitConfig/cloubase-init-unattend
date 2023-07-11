@@ -1,8 +1,6 @@
 [DEFAULT]
-username=Admin
-groups=Administrators
-rename_admin_user=true
-first_logon_behaviour=no
+username=Администратор
+groups=Администраторы
 inject_user_password=true
 config_drive_raw_hhd=true
 config_drive_cdrom=true
