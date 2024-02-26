@@ -1,4 +1,7 @@
+---
 formatVersion: 1
+name: BaseLinuxVM
+version: 1
 ########## INPUTS ##########
 inputs:
   namevm:
