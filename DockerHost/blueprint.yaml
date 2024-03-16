@@ -1,35 +1,42 @@
+---
 formatVersion: 1
+name: Docker Host
+version: 1
 ########## INPUTS ##########
 inputs:
   namevm:
-    title: Имя
+    title: Name
     type: string
-    description: Имя виртуальной машины
+    description: Name of VM
   images:
-    title: Операционная система
+    title: Operatig System
     type: object
     $ref: /ref/property-groups/imagesLinux
+    description: Choice Distr
   resources:
     type: object
-    title: ВЫБОР РЕСУРСА
+    title: Cloud Zone
     $ref: /ref/property-groups/resourceZone
+    description: Choice Cloud Zone
   vcpu:
-    title: ЦП
+    title: VCPU
     type: integer
+    description: Indicate the quantity VCPU
   mem:
-    title: Память ГБ
+    title: Memory in GB
     type: integer
     minimum: 1
     default: 1
-    description: RAM
+    description: Indicate the quantity RAM
   datastore:
     type: object
-    title: Хранилище дисков
+    title: DataStore
     $ref: /ref/property-groups/dsOnprem
+    description: Choice datastore
   diskOSsize:
     type: integer
-    title: Размер основного диска
-    description: Размер первого диска в Гигабайтах
+    title: Size Boot Disk
+    description: Size First Disk in GB
     minimum: 10
 ########## RESOURCES ##########
 resources:
