@@ -50,6 +50,17 @@ resources:
         hostname: ${input.namevm}
         groups:
           - docker
+        write_files:
+        - path: /etc/docker/daemon.json
+          content: |
+            {
+             "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]
+            }
+        - path: /etc/systemd/system/docker.service.d/override.conf
+          content: |
+            [Service]
+            ExecStart=
+            ExecStart=/usr/bin/dockerd --config-file /etc/docker/daemon.json
         apt:
           sources:
             docker.list:
