@@ -81,7 +81,7 @@ resources:
           - docker-buildx-plugin
           - docker-compose-plugin
         runcmd:
-          - usermod -aG docker #YouUser
+          - usermod -aG docker #UserName
       storage:
         constraints:
           - tag: ${input.datastore.datastores}
