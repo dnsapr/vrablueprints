@@ -19,7 +19,7 @@ inputs:
     $ref: /ref/property-groups/resourceZone
     description: Choice Cloud Zone
   vcpu:
-    title: VCPU
+    title: vCPU
     type: integer
     description: Indicate the quantity VCPU
   mem:
@@ -79,9 +79,10 @@ resources:
           - docker-ce-cli
           - containerd.io
           - docker-buildx-plugin
+          - docker-compose
           - docker-compose-plugin
         runcmd:
-          - usermod -aG docker #UserName
+          - usermod -aG docker #<UserName>
       storage:
         constraints:
           - tag: ${input.datastore.datastores}
