@@ -29,7 +29,10 @@ write_files:
       PasswordAuthentication yes
     permissions: '0644'
 runcmd:
-  - truncate -s 0 /etc/machine-id
+  - echo 'uninitialized\n' > /etc/machine-id
+  - rm /etc/netplan/50-cloud-init.yaml
+  - netplan generate
+  - netplan apply
   - cloud-init clean --logs
 power_state:
   delay: 1
