@@ -5,9 +5,9 @@ version: 1
 ########## INPUTS ##########
 inputs:
   namevm:
-    title: Имя
+    title: Name VM
     type: string
-    description: Имя виртуальной машины
+    description: VM name
   images:
     title: Операционная система
     type: object
@@ -17,18 +17,18 @@ inputs:
     title: ВЫБОР РЕСУРСА
     $ref: /ref/property-groups/resourceZone
   vcpu:
-    title: ЦП
+    title: vCPU
     type: object
     $ref: /ref/property-groups/cpu
   mem:
-    title: Память ГБ
+    title: Memory in GB
     type: integer
     minimum: 1
     default: 1
-    description: ОЗУ
+    description: RAM
   datastore:
     type: object
-    title: Хранилище дисков
+    title: Datastore
     $ref: /ref/property-groups/dsOnprem
   diskOSsize:
     type: integer
