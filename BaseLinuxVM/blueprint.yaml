@@ -9,12 +9,12 @@ inputs:
     type: string
     description: VM name
   images:
-    title: Операционная система
+    title: Сhoosing an operating system
     type: object
     $ref: /ref/property-groups/imagesLinux
   resources:
     type: object
-    title: ВЫБОР РЕСУРСА
+    title: Сhoosing an resource
     $ref: /ref/property-groups/resourceZone
   vcpu:
     title: vCPU
