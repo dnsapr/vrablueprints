@@ -4,9 +4,9 @@
  4 system_info:
  5   distro: ubuntu
  6   default_user:
- 7     name: #_
- 8     gecos: #_
- 9     passwd: #_
+ 7     name: #_<YouLinuxUser>
+ 8     gecos: #_<YouLinuxUser>
+ 9     passwd: #_hash_password_via_mkpasswd
 10     lock_passwd: false
 11     ssh_pwauth: true
 12     chpasswd: { expire: false }
