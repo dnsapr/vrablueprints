@@ -1,0 +1,93 @@
+formatVersion: 1
+########## INPUTS ##########
+inputs:
+  namevm:
+    title: Имя
+    type: string
+    description: 
+      Имя виртуальной машины
+  images:
+    title: Операционная система
+    type: object
+    $ref: /ref/property-groups/imagesLinux
+  resources:
+    type: object
+    title: ВЫБОР РЕСУРСА
+    $ref: /ref/property-groups/resourceZone
+  vcpu:
+    title: ЦП
+    type: object
+    $ref: /ref/property-groups/cpu
+  mem:
+    title: Память ГБ
+    type: integer
+    minimum: 1
+    default: 1
+    description: 
+      ОЗУ
+  datastore:
+    type: object
+    title: Хранилище дисков
+    $ref: /ref/property-groups/dsOnprem
+  diskOSsize:
+    type: integer
+    title: Размер основного диска
+    description: 
+      Размер первого диска в Гигабайтах
+    minimum: 10
+  verpsql:
+    type: number
+    title: Версия PostgreSQL
+    description: 
+      Версия PostgreSQL напр. 9.2
+    default: 16
+    minimum: 9
+    maximum: 17
+  passpsql:
+    type: string
+    title: Пароль суперпользователя
+    description: 
+      Пароль пользователя postgres
+########## RESOURCES ##########
+resources:
+##########    VM     ##########
+  baselnx:
+    type: Cloud.vSphere.Machine
+    allocatePerInstance: true
+    properties:
+      ${resource.baselnx.osType}: LINUX
+      constraints:
+        - tag: ${input.resources.resourcePlaces}
+      name: ${input.namevm}
+      image: ${input.images.imglnx}
+      cpuCount: ${input.vcpu.cpu}
+      coreCount: ${input.vcpu.cores}
+      totalMemoryMB: ${(input.mem) * 1024}
+      cloudConfig: |
+        #cloud-config
+        hostname: ${input.namevm}
+        apt:
+          sources:
+            pgdg.list:
+              keyid: 'b97b0afcaa1a47f044f244a07fcc7d46accc4cf8'
+              keyserver: 'hkp://keyserver.ubuntu.com:80'
+              source: 'deb https://apt.postgresql.org/pub/repos/apt $RELEASE-pgdg main'
+        packages:
+          - postgresql-${input.verpsql}
+        runcmd:
+          - sudo -u postgres psql -U postgres -d postgres -c "ALTER USER postgres PASSWORD '${input.passpsql}';"
+          - sed '0,/127.0.0.1\/32/s//0.0.0.0\/0/' -i /etc/postgresql/*/main/pg_hba.conf
+          - sed "s/^#listen_addresses =.*$/listen_addresses = '*'/" -i /etc/postgresql/*/main/postgresql.conf
+          - systemctl restart postgresql.service
+      storage:
+        constraints:
+          - tag: ${input.datastore.datastores}
+        provisioningType: ${input.datastore.provisioning}
+        bootDiskCapacityInGB: ${input.diskOSsize}
+      networks:
+        - network: ${resource.Cloud_vSphere_Network_1.id}
+  ########## NETWORK ##########
+  Cloud_vSphere_Network_1:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
