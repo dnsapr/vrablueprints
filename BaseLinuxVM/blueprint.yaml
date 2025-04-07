@@ -34,7 +34,7 @@ inputs:
     type: integer
     title: Размер основного диска
     description: Размер первого диска в Гигабайтах
-    minimum: 24
+    minimum: 10
 ########## RESOURCES ##########
 resources:
 ##########    VM     ##########
@@ -50,6 +50,9 @@ resources:
       cpuCount: ${input.vcpu.cpu}
       coreCount: ${input.vcpu.cores}
       totalMemoryMB: ${(input.mem) * 1024}
+      cloudConfig: |
+        #cloud-config
+        hostname: ${input.namevm}
       storage:
         constraints:
           - tag: ${input.datastore.datastores}
@@ -62,18 +65,3 @@ resources:
     type: Cloud.vSphere.Network
     properties:
       networkType: existing
-  ########## ANSIBLE ##########
-  Cloud_Ansible_1:
-    type: Cloud.Ansible
-    properties:
-      host: ${resource.baselnx.*}
-      osType: linux
-      account: ansib
-      username: usrlnx
-      password: ${secret.passLNX}
-      inventoryFile: /home/aria/inventory/vra/vhosts
-      playbooks:
-        provision:
-          - /home/aria/playbooks/bootstrap.yml + -e ansible_become_password=${secret.passLNX}
-      hostVariables:
-        vmName: ${input.namevm}
