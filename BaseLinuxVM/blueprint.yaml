@@ -32,8 +32,8 @@ inputs:
     $ref: /ref/property-groups/dsOnprem
   diskOSsize:
     type: integer
-    title: Размер основного диска
-    description: Размер первого диска в Гигабайтах
+    title: Size of the main disk
+    description: Size of the main disk in Gb
     minimum: 10
 ########## RESOURCES ##########
 resources:
