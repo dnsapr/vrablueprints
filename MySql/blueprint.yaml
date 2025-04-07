@@ -43,7 +43,6 @@ inputs:
     type: string
     title: Пароль MySQL
     encrypted: true
-    default: null
   allowIP:
     type: string
     title: Доступ с адреса
