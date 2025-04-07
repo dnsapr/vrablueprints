@@ -1,4 +1,7 @@
+---
 formatVersion: 1
+name: PostgreSQL
+version: 1
 ########## INPUTS ##########
 inputs:
   namevm:
