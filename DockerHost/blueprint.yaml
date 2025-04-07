@@ -5,38 +5,35 @@ version: 1
 ########## INPUTS ##########
 inputs:
   namevm:
-    title: Name
+    title: Name VM
     type: string
-    description: Name of VM
+    description: VM name
   images:
-    title: Operatig System
+    title: Сhoosing an operating system
     type: object
     $ref: /ref/property-groups/imagesLinux
-    description: Choice Distr
   resources:
     type: object
-    title: Cloud Zone
+    title: Сhoosing an resource
     $ref: /ref/property-groups/resourceZone
-    description: Choice Cloud Zone
   vcpu:
     title: vCPU
-    type: integer
-    description: Indicate the quantity VCPU
+    type: object
+    $ref: /ref/property-groups/cpu
   mem:
     title: Memory in GB
     type: integer
     minimum: 1
     default: 1
-    description: Indicate the quantity RAM
+    description: RAM
   datastore:
     type: object
-    title: DataStore
+    title: Datastore
     $ref: /ref/property-groups/dsOnprem
-    description: Choice datastore
   diskOSsize:
     type: integer
-    title: Size Boot Disk
-    description: Size First Disk in GB
+    title: Size of the main disk
+    description: Size of the main disk in Gb
     minimum: 10
 ########## RESOURCES ##########
 resources:
@@ -50,7 +47,8 @@ resources:
         - tag: ${input.resources.resourcePlaces}
       name: ${input.namevm}
       image: ${input.images.imglnx}
-      cpuCount: ${input.vcpu}
+      cpuCount: ${input.vcpu.cpu}
+      coreCount: ${input.vcpu.cores}
       totalMemoryMB: ${(input.mem) * 1024}
       cloudConfig: |
         #cloud-config
@@ -82,7 +80,9 @@ resources:
           - docker-compose
           - docker-compose-plugin
         runcmd:
-          - usermod -aG docker #<UserName>
+          - usermod -aG docker #_<YouLinuxUser>
+          ## Optionally add images registry
+          - sudo pkexec -u #_<YouLinuxUser> docker login https://#_<YouImagesRegistry> -u #_<YouImagesRegistryUser> -p ${secret.LocalHarborPass}
       storage:
         constraints:
           - tag: ${input.datastore.datastores}
