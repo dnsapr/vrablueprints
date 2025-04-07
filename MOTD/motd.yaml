@@ -1,0 +1,40 @@
+#cloud-config
+ 2 users:
+ 3   - default
+ 4 system_info:
+ 5   distro: ubuntu
+ 6   default_user:
+ 7     name: #_
+ 8     gecos: #_
+ 9     passwd: #_
+10     lock_passwd: false
+11     ssh_pwauth: true
+12     chpasswd: { expire: false }
+13     groups: [adm, audio, cdrom, dialout, dip, floppy, lxd, netdev, plugdev, sudo, video]
+14     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+15     shell: /bin/bash
+16 timezone: Europe/Moscow
+17 package_update: true
+18 package_upgrade: true
+19 packages:
+20   - figlet
+21 write_files:
+22   - path: /etc/update-motd.d/99-custom
+23     content: |
+24       #!/bin/bash
+25       echo "$HOSTNAME" | figlet -k
+26     permissions: '0755'
+27   - path: /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+28     content: |
+29       PasswordAuthentication yes
+30     permissions: '0644'
+31 runcmd:
+32   - rm /etc/update-motd.d/10-help-text
+33   - echo 'uninitialized\n' > /etc/machine-id
+34   - rm /etc/netplan/50-cloud-init.yaml
+35   - netplan generate
+36   - netplan apply
+37   - cloud-init clean --logs
+38 power_state:
+39   delay: 1
+40   mode: poweroff
