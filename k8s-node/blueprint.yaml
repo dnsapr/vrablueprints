@@ -1,6 +1,6 @@
 ---
 formatVersion: 1
-name: PostgreSQL
+name: k8s-node
 version: 1
 inputs:
   nodename:
