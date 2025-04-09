@@ -1,6 +1,6 @@
 ---
 formatVersion: 1
-name: k8s-node
+name: k8s-node-cri-o
 version: 1
 inputs:
   nodename:
